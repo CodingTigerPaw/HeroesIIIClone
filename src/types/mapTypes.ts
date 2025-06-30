@@ -9,6 +9,7 @@ export enum ResourceType {
   None = "none",
   Wood = "wood",
   Stone = "stone",
+  Sulfur = "sulfur",
 }
 
 export type Tile = {

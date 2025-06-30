@@ -1,4 +1,4 @@
-// useKeyboardControls.ts
+// hooks/useKeyboardControls.ts
 import { useEffect } from "react";
 
 export const useKeyboardControls = (

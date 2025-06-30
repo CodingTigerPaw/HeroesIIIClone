@@ -40,13 +40,25 @@ export const useMapGenerator = (mapWidth: number, mapHeight: number) => {
     });
 
     // Generowanie zasobów
+    const resourceProbabilities = {
+      [ResourceType.Wood]: 0.04,
+      [ResourceType.Stone]: 0.04,
+      [ResourceType.Sulfur]: 0.02,
+    };
+
     tiles.forEach((tile) => {
       if (tile.type === TerrainType.Grass || tile.type === TerrainType.Sand) {
-        const rand = Math.random();
-        if (rand < 0.04) {
-          tile.resource = ResourceType.Wood;
-        } else if (rand < 0.08) {
-          tile.resource = ResourceType.Stone;
+        tile.resource = ResourceType.None;
+
+        const possibleResources = Object.entries(resourceProbabilities)
+          .filter(([, prob]) => Math.random() < prob)
+          .map(([res]) => res as ResourceType);
+
+        if (possibleResources.length > 0) {
+          tile.resource =
+            possibleResources[
+              Math.floor(Math.random() * possibleResources.length)
+            ];
         }
       }
     });
